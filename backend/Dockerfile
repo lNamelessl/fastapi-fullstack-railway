@@ -62,4 +62,5 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 WORKDIR /app/backend/
 
-CMD ["fastapi", "run", "--workers", "4"]
+# Bind 0.0.0.0 and use the $PORT provided by Railway (or most PaaS providers)
+CMD fastapi run --host 0.0.0.0 --port ${PORT:-8000} --workers 4

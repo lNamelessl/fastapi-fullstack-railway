@@ -86,3 +86,42 @@ Check the file [release-notes.md](./release-notes.md).
 ## License
 
 The Full Stack FastAPI Template is licensed under the terms of the MIT license.
+
+## Deploying to Railway
+
+This fork is adapted for [Railway](https://railway.app):
+
+- The backend binds to `0.0.0.0:$PORT` (Railway injects `PORT`).
+- `railway.json` at the repo root builds the multi-stage `backend/Dockerfile`
+  (which compiles the frontend and serves it from FastAPI), runs Alembic
+  migrations + initial data via `preDeployCommand`, and health checks
+  `/api/v1/utils/health-check/`.
+- The backend already rewrites Railway's `postgres://` `DATABASE_URL` to the
+  `postgresql+psycopg://` driver scheme (`backend/app/core/config.py`).
+
+### One-click deploy
+
+Deploy this repo as a Railway template:
+
+```
+https://railway.app/new?github_url=https://github.com/lNamelessl/fastapi-fullstack-railway
+```
+
+Or from the CLI: `railway init` in this directory, then `railway up`.
+
+### Required environment variables
+
+Add a **PostgreSQL** database service and reference its `DATABASE_URL` in the
+backend service. Then set:
+
+| Variable | Example |
+|---|---|
+| `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` (reference from the Postgres service) |
+| `SECRET_KEY` | `openssl rand -hex 32` |
+| `FIRST_SUPERUSER` | `admin@example.com` |
+| `FIRST_SUPERUSER_PASSWORD` | a strong password |
+| `PROJECT_NAME` | `My Project` |
+| `FRONTEND_HOST` | your Railway public domain, e.g. `https://my-app.up.railway.app` |
+
+Note: the app refuses to start with default secret values (`changethis`) in
+production, so `SECRET_KEY` and `FIRST_SUPERUSER_PASSWORD` must be changed.

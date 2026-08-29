@@ -1,0 +1,15 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "backend/Dockerfile"
+  },
+  "deploy": {
+    "startCommand": "cd /app/backend && fastapi run --host 0.0.0.0 --port ${PORT:-8000} --workers 4",
+    "preDeployCommand": "cd /app/backend && bash scripts/prestart.sh",
+    "healthcheckPath": "/api/v1/utils/health-check/",
+    "healthcheckTimeout": 300,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
+}
