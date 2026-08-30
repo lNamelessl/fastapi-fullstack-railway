@@ -38,15 +38,15 @@ Deploy on Railway:
 
 **After deploying:** generate a public domain for the `backend` service and set it as `FRONTEND_HOST`, then sign in at `/` with `FIRST_SUPERUSER` / `FIRST_SUPERUSER_PASSWORD`. The app refuses to start with default secrets, so set real values for `SECRET_KEY` and `FIRST_SUPERUSER_PASSWORD`.
 
-# Deploy and Host FastAPI-Fullstack-Template on Railway
+# Deploy and Host
 
 FastAPI-Fullstack-Template is a modern, production-ready starter kit for building fullstack web applications. It combines a FastAPI backend, a React frontend served on the same domain, and PostgresDB for storage — deployed from a single containerized build. It is designed for rapid fullstack development, scalability, and easy deployment to cloud platforms like Railway.
 
-## About Hosting FastAPI-Fullstack-Template
+## About Hosting
 
 Hosting this template deploys a containerized fullstack application: one `backend` service running FastAPI (which serves both the REST API and the compiled React frontend) alongside a Postgres database with a persistent volume. Alembic migrations and superuser seeding run automatically on every deploy, so the database is always in sync with the latest image. Railway handles networking, HTTPS, restarts, and rollbacks — you go from zero to a live, authenticated application in minutes with minimal operational overhead.
 
-## Why Deploy FastAPI-Fullstack-Template on Railway?
+## Why Deploy
 
 Railway is a singular platform to deploy your infrastructure stack. Railway will host your infrastructure so you don't have to deal with configuration, while allowing you to vertically and horizontally scale it.
 
@@ -59,7 +59,7 @@ By deploying FastAPI-Fullstack-Template on Railway, you get a complete, authenti
 - Internal tools and admin panels
 - Educational projects, hackathons, and learning fullstack FastAPI + React
 
-## Dependencies for FastAPI-Fullstack-Template Hosting
+## Dependencies for
 
 - A Railway account (no local Docker or toolchain required — Railway builds from the repo)
 - Environment variables on the `backend` service: `SECRET_KEY`, `FIRST_SUPERUSER`, `FIRST_SUPERUSER_PASSWORD`, `PROJECT_NAME`, `FRONTEND_HOST` (`DATABASE_URL` is auto-referenced from the Postgres service)
