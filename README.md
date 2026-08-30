@@ -92,9 +92,11 @@ The Full Stack FastAPI Template is licensed under the terms of the MIT license.
 This fork is adapted for [Railway](https://railway.app):
 
 - The backend binds to `0.0.0.0:$PORT` (Railway injects `PORT`).
-- `railway.json` at the repo root builds the multi-stage `backend/Dockerfile`
-  (which compiles the frontend and serves it from FastAPI), runs Alembic
-  migrations + initial data via `preDeployCommand`, and health checks
+- The container runs Alembic migrations + initial superuser seeding on every
+  start (`scripts/prestart.sh` before `fastapi run` in the Dockerfile `CMD`,
+  mirrored in `railway.json` `startCommand`). Both steps are idempotent.
+- `railway.json` at the repo root builds the multi-stage `Dockerfile` (which
+  compiles the frontend and serves it from FastAPI) and health checks
   `/api/v1/utils/health-check/`.
 - The backend already rewrites Railway's `postgres://` `DATABASE_URL` to the
   `postgresql+psycopg://` driver scheme (`backend/app/core/config.py`).

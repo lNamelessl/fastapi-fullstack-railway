@@ -58,5 +58,7 @@ RUN uv sync --frozen --package app
 
 WORKDIR /app/backend/
 
-# Bind 0.0.0.0 and use the $PORT provided by Railway (or most PaaS providers)
-CMD fastapi run --host 0.0.0.0 --port ${PORT:-8000} --workers 4
+# Bind 0.0.0.0, use the $PORT provided by Railway (or most PaaS providers),
+# and run migrations + initial data before serving (Railway ignores
+# railway.json preDeployCommand on this build pipeline)
+CMD sh -c "bash scripts/prestart.sh && fastapi run --host 0.0.0.0 --port ${PORT:-8000} --workers 4"
