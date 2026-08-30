@@ -97,7 +97,7 @@ This fork is adapted for [Railway](https://railway.app):
   mirrored in `railway.json` `startCommand`). Both steps are idempotent.
 - `railway.json` at the repo root builds the multi-stage `Dockerfile` (which
   compiles the frontend and serves it from FastAPI) and health checks
-  `/api/v1/utils/health-check/`.
+  `/health`.
 - The backend already rewrites Railway's `postgres://` `DATABASE_URL` to the
   `postgresql+psycopg://` driver scheme (`backend/app/core/config.py`).
 

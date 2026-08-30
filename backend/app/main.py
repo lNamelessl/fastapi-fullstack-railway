@@ -33,4 +33,14 @@ app.add_middleware(
 )
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
+
+
+@app.get("/health", include_in_schema=False)
+def health_check() -> bool:
+    # Redirect-free health endpoint for platform probes (Railway strips the
+    # trailing slash of /api/v1/utils/health-check/, which FastAPI answers
+    # with a 307 that fails the check)
+    return True
+
+
 app.frontend("/", directory=FRONTEND_DIR)
